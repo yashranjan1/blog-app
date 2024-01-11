@@ -16,7 +16,12 @@ const BlogPostSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true
+    },
+    category: {
+        type: String,
+        required: true
     }
+    // look into adding images to mongodb
 })
 
 const BlogPostModel = mongoose.model("blog-contents", BlogPostSchema)
