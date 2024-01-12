@@ -1,30 +1,39 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import axios from 'axios'
+import NavBar from './components/Navbar'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './components/Home'
+import CreatePage from './components/Create'
 
 function App() {
 
     const [posts, setPosts] = useState([])
+    const [featured, setFeatured ] = useState([])
+
     
     // Get posts from axios on load
-    axios.get('http://localhost:3000/api/getPosts')
-    .then((posts)=>{
-        setPosts(posts.data)
-    }).catch(err => console.log(err))
     
-
+    useEffect(() => {   
+        async function getPosts() {
+            axios.get('http://localhost:3000/api/getPosts')
+            .then((posts)=>{
+                setPosts(posts.data)
+                const featuredPost = posts.data.filter((post)=>post.featured == true)
+                setFeatured(featuredPost[0])
+            }).catch(err => console.log(err))
+        }
+        getPosts()
+    } , [])
     return (
         <>
-            {posts.map((post)=>{
-                return (
-                    <div key={post.id}>
-                        <div>{post.title}</div>
-                        <div>{post.contents}</div>
-                        <div>{post.author}</div>
-                        <div>{post.date}</div>
-                    </div>
-                )
-            })}
+            <NavBar/>
+            <Routes>
+                <Route element={<HomePage featured={featured}/>} path='/' />
+                <Route element={<HomePage featured={featured}/>} path='/home' />
+                <Route element={""} path='/categories'/>
+                <Route element={<CreatePage />} path='/create'/>
+            </Routes>
         </>
     )
 }

@@ -20,8 +20,15 @@ const BlogPostSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    featured:{
+        type: Boolean, 
+        required: true
     }
-    // look into adding images to mongodb
 })
 
 const BlogPostModel = mongoose.model("blog-contents", BlogPostSchema)

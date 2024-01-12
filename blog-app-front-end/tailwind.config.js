@@ -5,7 +5,19 @@ export default {
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors:{
+                "text-color": "#333333",
+                "peach": "#fddfdf",
+                "aquamarine": "#c0e5e1"
+            },
+            fontFamily:{
+                montserrat: "'Montserrat', sans-serif;"
+            },
+            height:{
+                featured: '32rem'
+            }
+        },
     },
     plugins: [],
 }
