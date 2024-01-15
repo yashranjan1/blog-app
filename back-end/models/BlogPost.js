@@ -17,8 +17,8 @@ const BlogPostSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    category: {
-        type: String,
+    categories: {
+        type: Array,
         required: true
     },
     image: {

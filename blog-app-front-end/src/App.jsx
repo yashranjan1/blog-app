@@ -11,7 +11,6 @@ function App() {
     const [posts, setPosts] = useState([])
     const [featured, setFeatured ] = useState([])
 
-    
     // Get posts from axios on load
     
     useEffect(() => {   

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
 import Loading from "../Loading";
 import { motion } from "framer-motion";
 import CategoryTag from "../CategoryTag";
@@ -17,7 +16,7 @@ const Featured = (props) => {
         setMonth(fullDate.getMonth()+1)    
         setYear(fullDate.getFullYear())
     },[props.featured])
-
+    console.log()
     return ( 
         <>
             <div className="text-text-color font-montserrat flex flex-col w-full bg-gradient-to-r from-aquamarine to-peach pt-10 pb-10 px-12 sm:px-24 md:px-56">
@@ -44,7 +43,9 @@ const Featured = (props) => {
                                 className="h-featured rounded-t-lg"/>
                                 <div className="flex flex-col px-14 py-10">
                                     <div className="font-semibold text-4xl">{props.featured.title}</div>
-                                    <CategoryTag name={props.featured.category} />
+                                    {props.featured.categories && props.featured.categories.map((category)=>{
+                                        return <CategoryTag name={category} key={`${props.featured.id}-${category}`} />
+                                    })}
                                     <div className="flex mt-10 w-full text-right">
                                         <div className="flex-1">
                                             <div>

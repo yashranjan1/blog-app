@@ -16,9 +16,17 @@ export default {
             },
             height:{
                 featured: '32rem'
+            },
+            boxShadow:{
+                'inner-xl': "inset 0 2px 6px 0 rgb(0 0 0 / 0.5)"
+            },
+            cursor:{
+                "pointer-special": "url(hand.cur), pointer"
             }
         },
     },
-    plugins: [],
+    plugins: [ 
+        require('@tailwindcss/typography')
+    ],
 }
 
