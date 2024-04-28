@@ -11,8 +11,8 @@ app.use(cors())
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
- 
-// Connect to mongo 
+
+// Connect to mongo
 mongoose.connect(process.env.DATABASE_URL)
 
 app.get("/api/getPosts", (req, res) => {

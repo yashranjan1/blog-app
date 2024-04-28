@@ -2,22 +2,37 @@ import { useEffect, useState } from "react";
 import CategoryTag from "../CategoryTag";
 import ImageInput from "../ImageInput";
 import { AnimatePresence, motion, spring } from "framer-motion";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSnapshot } from "valtio";
 import store from "../../store";
 import ReactMarkdown from 'react-markdown'
+import axios from "axios";
+
+const validator = (title, content, selected, author, image) => {
+    var bad_fields = []
+    if (title === "") bad_fields.push("title")
+    if (content === "") bad_fields.push("content")
+    if (selected.length == 0) bad_fields.push("selected")
+    if (author === "") bad_fields.push("author")
+    if (image === "") bad_fields.push("image")
+    return bad_fields
+}
+
 
 const CreatePage = () => {
 
-   const snap = useSnapshot(store)
+    const navigate = useNavigate()
+    const snap = useSnapshot(store)
 
-    const [title, setTitle] = useState()
-    const [content, setContent] = useState()
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     const [selected, setSelected] = useState([])
     const [featured, setFeatured] = useState(false)
     const [author, setAuthor] = useState("")
 
     const [preview, setPreview] = useState(false)
+    const [errors, setErrorField] = useState(false)
+    const [posted, setPosted] = useState(false)
 
     const togglePreview = () => {
         setPreview(!preview)
@@ -46,6 +61,33 @@ const CreatePage = () => {
         "Open Source Projects",
         "Tech Career and Skills Development"
     ];
+
+    const validation_executor = (bad_fields) => {
+        if (bad_fields.length == 0){
+            // Submit
+            setErrorField(false)
+            var packet = {
+                title: title,
+                contents: content,
+                image: snap.image64,
+                categories: selected,
+                featured: featured,
+                author: author,
+                date: new Date().toJSON()
+            }
+            axios.post("http://localhost:3000/api/createPost", packet)
+            .then()
+            .catch(err => console.log(err))
+            setPosted(true)
+            setTimeout(()=>{
+                navigate("/home")
+            }, 2000)
+        }
+        else {
+            // Throw a fit
+            setErrorField(true)
+        }        
+    }    
   
     return ( 
         <>
@@ -104,7 +146,12 @@ const CreatePage = () => {
                         <div className="cursor-pointer select-none mt-5 mr-4 border-2 w-fit border-black py-3 px-6 rounded-3xl font-medium" onClick={togglePreview}>
                             Preview
                         </div>
-                        <div className="cursor-pointer select-none mt-5 border-2 w-fit border-black py-3 px-6 rounded-3xl font-medium">
+                        <div className="cursor-pointer select-none mt-5 border-2 w-fit border-black py-3 px-6 rounded-3xl font-medium" onClick={
+                            ()=>{
+                                var bad_fields = validator(title, content, selected, author, snap.image64)
+                                validation_executor(bad_fields)
+                            }
+                        }>
                             Submit
                         </div>
                     </div>
@@ -127,6 +174,22 @@ const CreatePage = () => {
                                     {content}
                                 </ReactMarkdown>
                             
+                        </div>
+                    </div>
+                </motion.div>
+                
+                }
+            </AnimatePresence>
+            {/* Post confirmation */}
+            <AnimatePresence>
+                {posted && 
+                
+                <motion.div className="fixed w-full flex items-center justify-center h-screen">
+                    <div className="w-full h-screen bg-black/30 z-10 absolute"></div>
+                    <div className="flex h-[80%] grow items-center justify-center">
+                        <div className="w-4/12 bg-white z-20 min-h-[50vh] max-h-full rounded-xl py-10 px-20 border-[20px] border-white overflow-y-auto">
+                            <span class="material-symbols-outlined text-[330px] text-center">check_circle</span>
+                            <p className="text-center text-lg font-bold mt-2">Your blog has been posted!</p>
                         </div>
                     </div>
                 </motion.div>

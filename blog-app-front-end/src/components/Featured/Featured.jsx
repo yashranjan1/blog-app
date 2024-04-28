@@ -16,7 +16,6 @@ const Featured = (props) => {
         setMonth(fullDate.getMonth()+1)    
         setYear(fullDate.getFullYear())
     },[props.featured])
-    console.log()
     return ( 
         <>
             <div className="text-text-color font-montserrat flex flex-col w-full bg-gradient-to-r from-aquamarine to-peach pt-10 pb-10 px-12 sm:px-24 md:px-56">
