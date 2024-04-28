@@ -19,7 +19,8 @@ function App() {
             .then((posts)=>{
                 setPosts(posts.data)
                 const featuredPost = posts.data.filter((post)=>post.featured == true)
-                setFeatured(featuredPost[0])
+                var featuredIndex = Math.floor(Math.random() * featuredPost.length);
+                setFeatured(featuredPost[featuredIndex])
             }).catch(err => console.log(err))
         }
         getPosts()

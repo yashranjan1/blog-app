@@ -42,9 +42,11 @@ const Featured = (props) => {
                                 className="h-featured rounded-t-lg"/>
                                 <div className="flex flex-col px-14 py-10">
                                     <div className="font-semibold text-4xl">{props.featured.title}</div>
-                                    {props.featured.categories && props.featured.categories.map((category)=>{
-                                        return <CategoryTag name={category} key={`${props.featured.id}-${category}`} />
-                                    })}
+                                    <div className="mt-5 flex">
+                                        {props.featured.categories && props.featured.categories.map((category)=>{
+                                            return <CategoryTag name={category} key={`${props.featured.id}-${category}`} />
+                                        })}
+                                    </div>
                                     <div className="flex mt-10 w-full text-right">
                                         <div className="flex-1">
                                             <div>
