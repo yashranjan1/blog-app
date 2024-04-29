@@ -33,6 +33,7 @@ function App() {
                 <Route element={<HomePage featured={featured}/>} path='/home' />
                 <Route element={""} path='/categories'/>
                 <Route element={<CreatePage />} path='/create'/>
+                <Route element={""} path='/blog/:id'></Route>
             </Routes>
         </>
     )
