@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import HomePage from './components/Home'
 import CreatePage from './components/Create'
 import DetailsPage from './components/DetailsPage/DetailsPage'
+import CategoriesPage from './components/CategoriesPage'
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
             <Routes>
                 <Route element={<HomePage featured={featured}/>} path='/' />
                 <Route element={<HomePage featured={featured}/>} path='/home' />
-                <Route element={""} path='/categories'/>
+                <Route element={<CategoriesPage />} path='/categories'/>
                 <Route element={<CreatePage />} path='/create'/>
                 <Route element={<DetailsPage />} path='/blog/:id'></Route>
             </Routes>

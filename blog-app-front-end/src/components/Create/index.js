@@ -1,2 +1,2 @@
 import CreatePage from "./CreatePage";
-export default CreatePage
+export default CreatePage;

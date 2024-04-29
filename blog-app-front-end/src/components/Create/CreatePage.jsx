@@ -37,8 +37,6 @@ const CreatePage = () => {
     const togglePreview = () => {
         setPreview(!preview)
     }
-    
-
     const blogCategories = [
         "Programming Languages",
         "Web Development",
@@ -104,7 +102,7 @@ const CreatePage = () => {
                         {
                             blogCategories.map((category) => {
                                 return (
-                                    <div key={category}>
+                                    <div key={category} className="py-2">
                                         <CategoryTag 
                                         name={category} 
                                         onClick={(e)=>{
