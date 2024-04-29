@@ -23,6 +23,15 @@ app.get("/api/getPosts", (req, res) => {
     })
 })
 
+app.get("/api/getSpecPost/:id", (req, res) => {
+    var id = req.params.id
+    BlogPostModel.find({_id : id }).then((blogPost) => {
+        res.json(blogPost)
+    }).catch((err) => {
+        res.json(err)
+    })
+})
+
 app.post("/api/createPost", async (req, res) => {
     const post = req.body
     const newBlogPost = new BlogPostModel(post)
