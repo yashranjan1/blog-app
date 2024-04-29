@@ -12,7 +12,7 @@ const Featured = (props) => {
     // set date 
     useEffect(() => {
         const fullDate = new Date(props.featured.date)
-        setDay(fullDate.getDay())
+        setDay(fullDate.getDate())
         setMonth(fullDate.getMonth()+1)    
         setYear(fullDate.getFullYear())
     },[props.featured])

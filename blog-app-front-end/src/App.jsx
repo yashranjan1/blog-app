@@ -5,6 +5,7 @@ import NavBar from './components/Navbar'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './components/Home'
 import CreatePage from './components/Create'
+import DetailsPage from './components/DetailsPage/DetailsPage'
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
                 <Route element={<HomePage featured={featured}/>} path='/home' />
                 <Route element={""} path='/categories'/>
                 <Route element={<CreatePage />} path='/create'/>
-                <Route element={""} path='/blog/:id'></Route>
+                <Route element={<DetailsPage />} path='/blog/:id'></Route>
             </Routes>
         </>
     )
