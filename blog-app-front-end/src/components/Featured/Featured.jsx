@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Loading from "../Loading";
 import { motion } from "framer-motion";
 import CategoryTag from "../CategoryTag";
+import { Link } from "react-router-dom";
 
 const Featured = (props) => {    
     
@@ -17,7 +18,7 @@ const Featured = (props) => {
         setYear(fullDate.getFullYear())
     },[props.featured])
     return ( 
-        <>
+        <Link to={`/blog/${props.featured._id}`}>
             <div className="text-text-color font-montserrat flex flex-col w-full bg-gradient-to-r from-aquamarine to-peach pt-10 pb-10 px-12 sm:px-24 md:px-56">
                 <div className="text-5xl font-bold text-slate-50">Featured</div>
                     {props.featured &&
@@ -68,7 +69,7 @@ const Featured = (props) => {
                         </div>                  
                     }
             </div>
-        </>
+        </Link>
      );
 }
  

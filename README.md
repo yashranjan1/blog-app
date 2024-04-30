@@ -1,4 +1,4 @@
-# 📝Blog app using MERN [WIP]
+# 📝Blog app using MERN
 
 ## About
 
